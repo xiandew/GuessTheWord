@@ -12,24 +12,29 @@
 <body>
 
     <p>Enter your guess</p>
-    <form id="wordTiles">
+    <form onsubmit="check(); return false;">
+        <div id="wordTiles"></div>
         <button id="submit">Submit</button>
     </form>
     <p>Game board</p>
     <hr>
-    <table id="gameboard">
-        <tr>
-            <th>Incorrect Guesses</th>
-            <td>000</td>
-        </tr>
-        <tr>
-            <th>Remaining Guesses</th>
-            <td>000</td>
-        </tr>
-    </table>
+    <div id="gameboard">
+        <div>
+            <span>Your CurrentScore</span>
+            <span id="yourCurrentScore">000</span>
+        </div>
+        <div>
+            <span>Incorrect Guesses</span>
+            <span id="incorrectGuesses">000</span>
+        </div>
+        <div>
+            <span>Remaining Guesses</span>
+            <span id="remainingGuesses">010</span>
+        </div>
+    </div>
     <hr>
     <script>
-        $( document ).ready(setWord());
+        $( document ).ready(reset());
     </script>
 </body>
 </html>
