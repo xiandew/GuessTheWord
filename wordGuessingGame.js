@@ -6,15 +6,23 @@ let gameState = {
 function setWord() {
     //set word to be guessed
     let word = words[Math.floor(Math.random() * words.length)].toLowerCase();
-    let hiddenLetters = [];
-    for (let i = 0, numHidden = Math.floor(word.length / 2); i < numHidden; i++) {
-        hiddenLetters.push(Math.floor(Math.random() * word.length));
+    let wordTiles = document.createElement("div");
+    for (let letter of word) {
+        wordTiles.innerHTML += `<input class="char" value="${letter}" maxlength="1" disabled>`;
     }
-    let wordTiles = "";
-    for (let letter in word) {
-        wordTiles += hiddenLetters.includes(parseInt(letter)) ? `<div class="guess"></div>` : `<div class="char">${word[letter]}</div>`;
+
+    for (let i = 0, numGuesses = Math.ceil(word.length / 2); i < numGuesses; i++) {
+        let letters =
+            Array.from(wordTiles.getElementsByClassName("char"))
+            .filter(letter => letter.disabled == true);
+        let guess = letters[Math.floor(Math.random() * letters.length)];
+        guess.disabled = false;
+        guess.className = "guess";
+        guess.removeAttribute("value");
     }
-    document.getElementById("wordTiles").innerHTML = wordTiles;
+
+    let submitBtn = document.getElementById("submit");
+    submitBtn.parentNode.insertBefore(wordTiles, submitBtn);
 }
 
 function validate (guess) {

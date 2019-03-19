@@ -3,25 +3,21 @@
 <head>
     <title>Guess The Word</title>
     <meta charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="words.js"></script>
     <script src="wordGuessingGame.js"></script>
 </head>
 
 <body>
-<div>
-    <div id="wordTiles">
-        <!--<div class="char">w</div><div class="char">o</div><div class="char">r</div><div class="char">d</div>-->
-    </div>
-    <br><br>
-    <form>
-        <label>Enter your guess</label>
-        <label><input type="text" name="guess"></label>
-        <button>Submit</button>
+
+    <p>Enter your guess</p>
+    <form id="wordTiles">
+        <button id="submit">Submit</button>
     </form>
-    <br><br><br><br>Game board
+    <p>Game board</p>
     <hr>
-    <table id="gameboard" border=1>
+    <table id="gameboard">
         <tr>
             <th>Incorrect Guesses</th>
             <td>000</td>
@@ -31,8 +27,9 @@
             <td>000</td>
         </tr>
     </table>
-    <hr><br><br>
-    <button onclick="setWord()">Set word to be guessed</button>
-</div>
+    <hr>
+    <script>
+        $( document ).ready(setWord());
+    </script>
 </body>
 </html>
