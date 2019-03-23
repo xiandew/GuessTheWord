@@ -1,5 +1,5 @@
 # WordGuessingGame
-A simple word guessing game. Inspired from one of the info30005 week3 workshop questions and advanced features added.
+A simple word guessing game. Inspired from one of the INFO30005 week3 workshop questions and advanced features added.
 
 You can play it <a href="https://xiandew.github.io/projects/WordGuessingGame/index.html" target="_blank">here</a>.
 
