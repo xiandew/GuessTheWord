@@ -14,7 +14,7 @@ function setWord() {
     let wordTiles = document.getElementById("wordTiles");
     wordTiles.innerHTML = "";
     for (let i in word) {
-        wordTiles.innerHTML += `<input class="char" value=${word[i]} id=${i} maxlength="1" disabled>`;
+        wordTiles.innerHTML += `<input class="char" value=${word[i]} id=${i} maxlength="1" disabled oninput="onTypeWord(${i})">`;
     }
 
     let unordered = {};
@@ -34,6 +34,43 @@ function setWord() {
 
     let submitBtn = document.getElementById("submit");
     submitBtn.parentNode.insertBefore(wordTiles, submitBtn);
+
+    // auto focus on the first letter
+    requestNextFocusLetter(0);
+}
+
+function requestNextFocusLetter(id) {
+    // check letters after current input
+    for (let i = id; i < word.length; ++i) {
+        const nextWordHTML = document.getElementById(i);
+        if (nextWordHTML.value.length <= 0) {
+            document.getElementById(i).focus();
+            return;
+        }
+    }
+
+    // if after does not exist, check from 0
+    for (let i = 0; i < id; ++i) {
+        const nextWordHTML = document.getElementById(i);
+        if (nextWordHTML.value.length <= 0) {
+            document.getElementById(i).focus();
+            return;
+        }
+    }
+
+    // all letters are typed, focus on submit
+    document.getElementById("submit").focus();
+}
+
+// on typing word with id i, auto move cursor to next unfilled word
+// if no such word exist, request submit button focus
+function onTypeWord(id) {
+    const wordHTML = document.getElementById(id);
+
+    // make sure its input, not delete
+    if (wordHTML.value.length >= 1) {
+        requestNextFocusLetter(id + 1);
+    }
 }
 
 function validateGuesses () {
@@ -58,6 +95,8 @@ function check () {
     } else {
         alert("Wrong! Try again");
         updateWordTiles();
+        // auto focus on the first letter
+        requestNextFocusLetter(0);
         updateGameState({
             "incorrectGuesses": gameState.incorrectGuesses + 1,
             "remainingGuesses": gameState.remainingGuesses - 1
