@@ -18,7 +18,7 @@ function setWord() {
     }
 
     let unordered = {};
-    for (let i = 0, numGuesses = Math.ceil(word.length / 2); i < numGuesses; i++) {
+    for (let i = 0, numGuesses = Math.floor(word.length / 2); i < numGuesses; i++) {
         let letters =
             Array.from(wordTiles.getElementsByClassName("char"))
                 .filter(letter => letter.disabled == true);
